@@ -13,4 +13,42 @@ RSpec.describe Flight, type: :model do
     it { should have_many :flight_passengers }
     it { should have_many(:passengers).through(:flight_passengers) }
   end
+
+  describe 'model methods' do 
+    it 'minors' do 
+      southwest = Airline.create(name: "Southwest")
+
+      flight_1 = southwest.flights.create(number: '227', 
+                                          date: '1/20/20',
+                                          time: '12:00 PM',
+                                          departure_city: 'Cleveland',
+                                          arrival_city: 'Denver')
+
+      dave = Passenger.create(name: 'Dave', age: 17)
+      steve = Passenger.create(name: 'Steve', age: 20)
+      mike = Passenger.create(name: 'Mike', age: 85)
+
+      flight_1.passengers << [dave, steve, mike]
+
+      expect(flight_1.minors).to eq(1)
+    end
+
+    it 'adults' do 
+      southwest = Airline.create(name: "Southwest")
+
+      flight_1 = southwest.flights.create(number: '227', 
+                                          date: '1/20/20',
+                                          time: '12:00 PM',
+                                          departure_city: 'Cleveland',
+                                          arrival_city: 'Denver')
+
+      dave = Passenger.create(name: 'Dave', age: 17)
+      steve = Passenger.create(name: 'Steve', age: 20)
+      mike = Passenger.create(name: 'Mike', age: 85)
+
+      flight_1.passengers << [dave, steve, mike]
+
+      expect(flight_1.adults).to eq(2)
+    end 
+  end
 end

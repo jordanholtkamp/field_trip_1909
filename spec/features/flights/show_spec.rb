@@ -44,5 +44,28 @@ describe 'As a user', type: :feature do
 
       expect(page).to_not have_css("#passenger-#{mike.id}")
     end
+
+    it 'tells me how many minors and adults are on the flight' do
+      southwest = Airline.create(name: "Southwest")
+
+      flight_1 = southwest.flights.create(number: '227', 
+                                          date: '1/20/20',
+                                          time: '12:00 PM',
+                                          departure_city: 'Cleveland',
+                                          arrival_city: 'Denver')
+
+      dave = Passenger.create(name: 'Dave', age: 17)
+      steve = Passenger.create(name: 'Steve', age: 20)
+      mike = Passenger.create(name: 'Mike', age: 85)
+
+      flight_1.passengers << [dave, steve, mike]
+
+      visit "/flights/#{flight_1.id}"
+
+      within "#ages" do
+        expect(page).to have_content("Minors: 1")
+        expect(page).to have_content("Adults: 2")
+      end
+    end
   end
 end
