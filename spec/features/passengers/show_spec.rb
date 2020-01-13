@@ -39,11 +39,11 @@ describe 'As a user' do
 
       expect(page).to_not have_css("flight-#{@flight_2.id}")
 
-      within "flight-#{@flight_1.id}" do
+      within "#flight-#{@flight_1.id}" do
         expect(page).to have_link(@flight_1.number)
       end
 
-      within "flight-#{@flight_3.id}" do
+      within "#flight-#{@flight_3.id}" do
         click_link(@flight_3.number)
       end
 
@@ -51,11 +51,3 @@ describe 'As a user' do
     end 
   end 
 end
-
-# User Story 2, Passenger Show Page
-
-# As a visitor
-# When I visit a passengers show page ('/passengers/:id')
-# I see that passengers name
-# And I see a section of the page that displays all flight numbers of the flights for that passenger
-# And all flight numbers listed link to that flights show page
