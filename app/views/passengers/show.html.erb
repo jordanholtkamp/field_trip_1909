@@ -9,3 +9,10 @@
   </section>
 <% end %>
 </ul>
+
+<h6>Add new flight:</h6>
+<%= form_tag "/passengers/#{@passenger.id}/flights", method: :post do %>
+  <%= label_tag :new_flight_number %>
+  <%= text_field_tag :new_flight_number %>
+  <%= submit_tag "Add Flight" %>
+<% end %>

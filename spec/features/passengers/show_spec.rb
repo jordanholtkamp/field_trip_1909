@@ -49,5 +49,16 @@ describe 'As a user' do
 
       expect(current_path).to eq("/flights/#{@flight_3.id}")
     end 
+
+    it 'allows me to add a flight' do
+      visit "/passengers/#{@mike.id}"
+
+      fill_in :new_flight_number, with: "#{@flight_1.number}"
+      click_button 'Add Flight'
+
+      expect(current_path).to eq("/passengers/#{@mike.id}")
+
+      expect(page).to have_link("#{@flight_1.number}")
+    end
   end 
 end
