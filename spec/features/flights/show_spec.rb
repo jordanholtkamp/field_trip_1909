@@ -63,8 +63,8 @@ describe 'As a user', type: :feature do
       visit "/flights/#{flight_1.id}"
 
       within "#ages" do
-        expect(page).to have_content("Minors: 1")
-        expect(page).to have_content("Adults: 2")
+        expect(page).to have_content("Minors on this flight: 1")
+        expect(page).to have_content("Adults on this flight: 2")
       end
     end
   end
